@@ -1,0 +1,38 @@
+#quote-box{
+    height: 250px;
+    width: 550px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:0 30px;
+}
+
+#text{
+    font-size: 2rem;
+}
+
+#author{
+    margin:10px;
+    float: right;
+    font-size: 1.4rem;
+}
+
+.button-group{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+button{
+    font-size: 1rem;
+    padding: 10px;
+    color: white;
+    border-radius: 2px;
+    border:none;
+    cursor: pointer;
+    
+}
