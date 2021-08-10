@@ -57,8 +57,8 @@ const App = () => {
 
     //UseEffect
     useEffect(() => {
-        getQuote()
-        fetchQuote()
+        getQuote() //eslint-disable-next-line
+        fetchQuote() //eslint-disable-next-line
     }, [])
 
     const getQuote = () => {
@@ -73,7 +73,6 @@ const App = () => {
         const response = await axios.get("https://type.fit/api/quotes")
         setData(response.data)
         setBgColor(color[Math.floor(Math.random() * color.length)])
-        console.log(data);
     }
 
 
