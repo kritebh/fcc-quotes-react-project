@@ -1,11 +1,44 @@
-import React,{useEffect,useState} from 'react'
-import QuoteBox from './QuoteBox'
+import React, { useEffect, useState } from 'react'
+// import QuoteBox from './QuoteBox'
 import './App.css'
 import axios from 'axios'
+
+
+const initialQuotes = [{
+    "text": "Genius is one percent inspiration and ninety-nine percent perspiration.",
+    "author": "Thomas Edison"
+},
+{
+    "text": "You can observe a lot just by watching.",
+    "author": "Yogi Berra"
+},
+{
+    "text": "A house divided against itself cannot stand.",
+    "author": "Abraham Lincoln"
+},
+{
+    "text": "Difficulties increase the nearer we get to the goal.",
+    "author": "Johann Wolfgang von Goethe"
+},
+{
+    "text": "Fate is in your hands and no one elses",
+    "author": "Byron Pulsifer"
+},
+{
+    "text": "Be the chief but never the lord.",
+    "author": "Lao Tzu"
+},
+{
+    "text": "Nothing happens unless first we dream.",
+    "author": "Carl Sandburg"
+},]
+
+
+
 const App = () => {
-    const [data,setData] = useState([])
-    const [quote,setQuote] = useState({text:"",author:""})
-    const [bgColor,setBgColor] = useState("")
+    const [data, setData] = useState(initialQuotes)
+    const [quote, setQuote] = useState({})
+    const [bgColor, setBgColor] = useState("")
 
     //handling Color
     const color = [
@@ -20,29 +53,41 @@ const App = () => {
         "#2a5298",
     ]
 
-    //Handling Quotes From API
-     const sendQuote= ()=>{
-        setQuote(data[Math.floor(Math.random()*data.length)])
+
+    //UseEffect
+    useEffect(() => {
+        fetchQuote()
+        getQuote()
+    }, [])
+
+    const getQuote = () => {
+        setQuote(data[Math.floor(Math.random() * data.length)])
         setBgColor(color[Math.floor(Math.random() * color.length)])
         console.log(quote);
     }
 
-    //UseEffect
-    useEffect(()=>{
-        getQuote()
-        sendQuote()
-    },[])
 
-   const getQuote= async ()=>{
+
+    const fetchQuote = async () => {
         const response = await axios.get("https://type.fit/api/quotes")
         setData(response.data)
+        setBgColor(color[Math.floor(Math.random() * color.length)])
+        console.log(data);
     }
 
-    
 
     return (
-        <div className="body" style={{ backgroundColor: bgColor}}>
-            <QuoteBox quote={quote?.text} author={quote?.author} color={bgColor} getQuote={sendQuote}/>
+        <div className="body" style={{ backgroundColor: bgColor }}>
+            <div id="quote-box" style={{ color: bgColor }}>
+                <div className="quote">
+                    <blockquote id="text"> <i className="fa fa-quote-left"> </i> {quote.text?quote.text :"Quotes are Loading"}</blockquote>
+                    <p id="author">- {quote.author ? quote.author : "unknown"}</p>
+                </div>
+                <div className="button-group">
+                    <a id="tweet-quote" style={{ backgroundColor: bgColor }} rel="noreferrer" target="_blank" href={`https://twitter.com/intent/tweet?hashtags=quotes&text=${quote.text}&via=kritebh`}><i className="fab fa-twitter"></i></a>
+                    <button id="new-quote" style={{ backgroundColor: bgColor }} onClick={getQuote}>New Quote</button>
+                </div>
+            </div>
         </div>
     )
 }
