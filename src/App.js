@@ -51,13 +51,14 @@ const App = () => {
         "#27AE60",
         "#764ba2",
         "#2a5298",
+        
     ]
 
 
     //UseEffect
     useEffect(() => {
-        fetchQuote()
         getQuote()
+        fetchQuote()
     }, [])
 
     const getQuote = () => {
@@ -77,8 +78,8 @@ const App = () => {
 
 
     return (
-        <div className="body" style={{ backgroundColor: bgColor }}>
-            <div id="quote-box" style={{ color: bgColor }}>
+        <div className="body" style={{ backgroundColor: bgColor ,transition:"500ms ease"}}>
+            <div id="quote-box" style={{ color: bgColor ,transition:"500ms ease"}}>
                 <div className="quote">
                     <blockquote id="text"> <i className="fa fa-quote-left"> </i> {quote.text?quote.text :"Quotes are Loading"}</blockquote>
                     <p id="author">- {quote.author ? quote.author : "unknown"}</p>
