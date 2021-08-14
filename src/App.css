@@ -24,6 +24,12 @@
     padding:10px 30px;
 }
 
+@media (max-width:550px) {
+    #quote-box{
+        width: 300px;
+    }
+}
+
 #text{
     font-size: 2rem;
 }
